@@ -9,25 +9,25 @@ interface TodoListProps {
 }
 
 const  TodoList: React.FC<TodoListProps> = ({ tasks }) => {
-    const [tab, setTab] = useState<"task" | "completed">('task') 
+    const [tab, setTab] = useState<"all" | "completed">('all') 
 
-    const fileteredTasks = tasks.filter((task) => tab === "task" ? !task.is_completed : task.is_completed)
+    const fileteredTasks = tasks.filter((task) => tab === "all" ? task : task.is_completed)
 
   return (
     <><ButtonGroup sx={{ mb: 2 }}>
           <Button
-            variant={tab === "task" ? "contained" : "outlined"}
+            variant={tab === "all" ? "contained" : "outlined"}
             sx={{
-              bgcolor: tab === "task" ? 'rgb(164,255,237)' : '#fff',
+              bgcolor: tab === "all" ? 'rgb(164,255,237)' : '#fff',
               color: 'black',
               fontWeight: 700,
               border: 'none',
               boxShadow: 'none',
               '&:hover': { bgcolor: 'rgb(164,255,237)' }
             }}
-            onClick={() => setTab('task')}
+            onClick={() => setTab('all')}
           >
-            task
+            all
           </Button>
           <Button
             variant={tab === "completed" ? "contained" : "outlined"}

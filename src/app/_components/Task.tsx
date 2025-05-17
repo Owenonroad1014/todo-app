@@ -8,7 +8,9 @@ import {
   Modal,
   Box,
   Typography,
-    Checkbox,
+  Checkbox,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { ITask } from "@/types/task";
 import { MdDelete } from "react-icons/md";
@@ -18,19 +20,11 @@ import { useRouter } from "next/navigation";
 interface TaskProps {
   task: ITask;
 }
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  borderRadius: 4,
-  p: 4,
-};
 
 const Task: React.FC<TaskProps> = ({ task }) => {
+  // 在組件內部
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [openModalDelete, setOpenModalDelete] = useState(false);
   const router = useRouter();
 
@@ -38,16 +32,38 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     await deleteTodo(id);
     setOpenModalDelete(false);
     router.refresh();
-}
+  };
 
   const handleUpdateTask = async (task: ITask) => {
-  await updateTodo({
-    ...task,
-    is_completed: task.is_completed,
-  });
+    await updateTodo({
+      ...task,
+      is_completed: task.is_completed,
+    });
     router.refresh();
-  }
+  };
+  const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: isMobile ? '90%' : 400,
+  bgcolor: 'background.paper',
+  borderRadius: 2,
+  boxShadow: 24,
+  p: 4,
+};
 
+const buttonStyle = {
+  position: 'absolute',
+  bottom: isMobile ? 15 : 20,
+  right: isMobile ? 15 : 20,
+  bgcolor: 'rgb(164,255,237)',
+  color: 'black',
+  px: 2,
+  '&:hover': {
+    bgcolor: 'rgb(144,235,217)',
+  },
+};
   return (
     <>
       <ListItem
@@ -60,55 +76,54 @@ const Task: React.FC<TaskProps> = ({ task }) => {
           minHeight: 57,
         }}
         disablePadding
-        secondaryAction={
-          <IconButton
-            edge="end"
-            sx={{ color: "rgba(224, 0, 0, 0.9)" }}
-            onClick={() => setOpenModalDelete(true)}
-          >
-            <MdDelete />
-          </IconButton>
-        }
       >
-        <Modal
-          open={openModalDelete}
-          onClose={() => setOpenModalDelete(false)}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              確定要刪除嗎?
-            </Typography>
-            <Button
-              onClick={() =>
-                { if (typeof task.id === "number") {
-                  handleDeleteTask(task.id);
-                }
-              }}
-              variant="contained"
-              sx={{
-                position: "absolute",
-                bottom: 10,
-                right: 20,
-                bgcolor: "rgb(164,255,237)",
-                color: "black",
-                px: 2,
-              }}
-              disableElevation
-            >
-              確定
-            </Button>
-          </Box>
-        </Modal>
-        <IconButton edge="start"
-         onClick={() => {
+        <IconButton
+          edge="start"
+          onClick={() => {
             handleUpdateTask(task);
-         }}>
-          <Checkbox />  
+          }}
+        >
+          <Checkbox checked={task.is_completed} />
         </IconButton>
-        <ListItemText primary={task.task} />
+        <ListItemText primary={task.task} 
+        sx={{ textDecoration: task.is_completed ? 'line-through' : 'none' }}/>
+        <IconButton
+          edge="end"
+          sx={{ color: "rgba(254, 92, 133, 0.9)" }}
+          onClick={() => setOpenModalDelete(true)}
+        >
+          <MdDelete />
+        </IconButton>
       </ListItem>
+      <Modal
+        open={openModalDelete}
+        onClose={() => setOpenModalDelete(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ mb: isMobile ? 4 : 3 }}
+          >
+            確定要刪除嗎?
+          </Typography>
+          <Button
+            onClick={() => {
+              if (typeof task.id === "number") {
+                handleDeleteTask(task.id);
+              }
+            }}
+            variant="contained"
+            sx={buttonStyle}
+            disableElevation
+          >
+            確定
+          </Button>
+        </Box>
+      </Modal>
     </>
   );
 };

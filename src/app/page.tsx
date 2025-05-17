@@ -16,8 +16,11 @@ export default async function TodoStatic() {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      justifyContent: 'center',
+      paddingLeft: 20,
+      paddingRight: 20,
     }}>
-      <Paper sx={{ p: 4, borderRadius: 3, minWidth: 390 }}>
+      <Paper sx={{ p: 4, borderRadius: 3, minWidth: 340 }}>
         <Typography variant="h4" fontWeight="bold" gutterBottom sx={{mb:2}}>
           To-do list
         </Typography>
