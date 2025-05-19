@@ -7,7 +7,28 @@
 - 使用 Next.js 框架，支援伺服器端渲染（SSR）與靜態網站生成（SSG）。
 - 使用 TypeScript 確保程式碼的型別安全。
 - 提供基本的待辦事項管理功能，包括新增、編輯、刪除與標記完成。
-- 使用 `next/font` 自動優化並載入 [Geist](https://vercel.com/font) 字體。
+
+## 技術棧
+
+### 前端
+
+- **框架**：Next.js 14
+- **語言**：TypeScript
+- **UI 框架**：Material-UI (MUI)
+- **狀態管理**：React Hooks
+- **樣式解決方案**：Styled Components
+- **圖示庫**：React Icons
+
+### 後端 [後端程式碼](https://github.com/Owenonroad1014/gym-backend/blob/main/routes/todo.js)
+
+- **框架**：Node.js/Express
+- **資料庫**：Google Cloud Platform (GCP)
+- **API 設計**：RESTful API
+
+### 部署
+
+- **平台**：Vercel
+- **版本控制**：Git
 
 ## 開發過程
 
@@ -65,5 +86,3 @@ bun dev
 最簡單的部署方式是使用 [Vercel 平台](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)，由 Next.js 的創建者提供。
 
 更多部署細節，請參考 [Next.js 部署文件](https://nextjs.org/docs/app/building-your-application/deploying)。
-
-
