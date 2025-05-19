@@ -15,7 +15,7 @@
 
 以下是使用 Figma 繪製的框線圖，展示了待辦事項清單的使用者介面：
 
-![Figma 設計圖](https://www.figma.com/design/YP0Rn5c7qdcb2RT0SE5YPD/59?node-id=191-169&t=qYTGaT7SWnstI3BL-1)
+[Figma 設計圖](https://www.figma.com/design/YP0Rn5c7qdcb2RT0SE5YPD/59?node-id=191-169&t=qYTGaT7SWnstI3BL-1)
 
 - 利用 AI 工具協助透過 Material-UI (MUI) 完成畫面設計。
 - 使用 Node.js/Express 撰寫 API，並串接 Google Cloud Platform (GCP) 雲端資料庫。由於之前的專案仍在線上，因此直接使用現有資料庫建立一個 TODO 的資料表。
@@ -26,6 +26,12 @@
 - **讀取（Read）**：顯示所有待辦事項的清單。
 - **更新（Update）**：使用者可以編輯或標記待辦事項為已完成。
 - **刪除（Delete）**：使用者可以刪除不需要的待辦事項。
+
+## 部署網址
+
+您可以在以下網址查看部署後的待辦事項清單應用程式：
+
+[待辦事項清單應用程式](https://todo-app-seven-virid.vercel.app/)
 
 ## 開始使用
 
